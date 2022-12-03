@@ -25,20 +25,23 @@ const AUTH_OPTIONS = {
 };
 
 function verifyCallBack(accessToken, refreshToken, profile, done) {
-    console.log('Google profile', profile);
+    console.log('Google profile', profile.id);
     done(null, profile);
 }
 
 passport.use(new Strategy(AUTH_OPTIONS, verifyCallBack));
 // save the session to the cookie 
 passport.serializeUser((user, done)=> {
+    console.log("pass user: ",user)
+    console.log('.................');
     done(null, user.id);
 });
-// read the session from the cookie
+// read the session from the cookie 
 passport.deserializeUser((obj, done) => {
     // User.findById(id).then(user => {
     //     done(null, obj);
     // })
+    console.log('des user: ', obj);
     done(null, obj);
 });
 
